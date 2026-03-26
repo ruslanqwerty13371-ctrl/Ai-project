@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Clock</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { margin-top: 50px; }
+        .clock { font-size: 2em; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Digital Clock in Different Time Zones</h1>
+    <div class="clock" id="utc"></div>
+    <div class="clock" id="est"></div>
+    <div class="clock" id="pst"></div>
+    <div class="clock" id="cet"></div>
+    <div class="clock" id="ist"></div>
+    <div class="clock" id="jst"></div>
+    <div class="clock" id="sydney"></div>
+
+    <script>
+        function updateClocks() {
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const utcTime = new Date(new Date().toUTCString());
+            document.getElementById('utc').innerText = 'UTC: ' + utcTime.toLocaleTimeString('en-US', options);
+            document.getElementById('est').innerText = 'EST: ' + new Date(utcTime - 5 * 60 * 60 * 1000).toLocaleTimeString('en-US', options);
+            document.getElementById('pst').innerText = 'PST: ' + new Date(utcTime - 8 * 60 * 60 * 1000).toLocaleTimeString('en-US', options);
+            document.getElementById('cet').innerText = 'CET: ' + new Date(utcTime + 1 * 60 * 60 * 1000).toLocaleTimeString('en-US', options);
+            document.getElementById('ist').innerText = 'IST: ' + new Date(utcTime + 5.5 * 60 * 60 * 1000).toLocaleTimeString('en-US', options);
+            document.getElementById('jst').innerText = 'JST: ' + new Date(utcTime + 9 * 60 * 60 * 1000).toLocaleTimeString('en-US', options);
+            document.getElementById('sydney').innerText = 'Sydney: ' + new Date(utcTime + 11 * 60 * 60 * 1000).toLocaleTimeString('en-US', options);
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks(); // Initial call to set time immediately
+    </script>
+</body>
+</html>
